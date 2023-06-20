@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Pagina Administrativa</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col text-center">
+          <h1>Lista de Usuarios</h1>
+        </div>
+      </div>
+      <div class="row account">
+        <div class="col-12">
+          <table id="tabelaAccount" class="table">
+            <thead>
+              <tr>
+                <th scope="col-2">ID</th>
+                <th scope="col-2">Nome</th>
+                <th scope="col-2">Email</th>
+                <th scope="col-2">Senha</th>
+                <th scope="col=2">Data de Aniversário</th>
+                <th scope="col=2">
+                  <button class="btn btn-danger">Deletar Cadastro</button>
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col text-center">
+          <h1>Lista de Produtos</h1>
+        </div>
+      </div>
+      <div class="row m-3">
+        <div class="col">
+          <table id="tabelaBuys" class="table">
+            <thead>
+              <tr>
+                <th scope="col-2">Nome</th>
+                <th scope="col-2">Preço</th>
+                <th scope="col-2">Comprar</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container col-6 text-center">
+        <div class="col">
+          <a href="account.html" target="_blank"> Sua Conta </a>
+        </div>
+        <div class="col">
+          <a href="buy.html" target="_blank"> Compras </a>
+        </div>
+        <div class="col">
+          <a href="index.html" target=""> Home </a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      /*
+window.addEventListener('load', () => {
+    const tabela = document.getElementById('table');
+    const tbody = tabela.querySelector('tbody');
+
+    fetch('http://localhost:7070/players/all')
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Ocorreu um erro na obtenção dos dados.');
+            }
+        })
+.catch((error) => {
+            console.error('Erro de conexão com a API:', error);
+        });
+
+    deletar = (id) => {
+        fetch(`http://localhost:7070/players/delete/${id}`, {
+            method: 'DELETE'
+        })
+        .then((response) => {
+            if (response.ok) {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].id === id) {
+                        data.splice(i, 1);
+                        break;
+                    }
+                }
+
+                const rows = tbody.getElementsByTagName('tr');
+                for (let i = 0; i < rows.length; i++) {
+                    const rowId = parseInt(rows[i].cells[0].textContent);
+                    if (rowId === id) {
+                        tbody.deleteRow(i);
+                        break;
+                    }
+                }
+            } else {
+                throw new Error('Ocorreu um erro ao deletar o item.');
+            }
+        })
+        .catch((error) => {
+            console.error('Erro de conexão com a API:', error);
+        });
+    };
+});
+*/
+
+
+
+
+
+
+
+
+
+       
+
+function createDeleteButton(idRegister) {
+  function deletarLinha(button) {
+    var linha = button.parentNode.parentNode;
+    linha.parentNode.removeChild(linha);
+  }
+  
+  function deleteRegister(idRegister) {
+    fetch(`https://localhost:5500/register/${idRegister}`, {
+      method: "DELETE",
+    })
+      .then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Ocorreu um erro ao deletar o registro.");
+        }
+      })
+      .then(function (data) {
+        console.log("Registro deletado:", data);
+        alert("Registro deletado com sucesso.");
+      })
+      .catch(function (error) {
+        console.error("Erro ao deletar o registro:", error);
+        alert("Erro ao deletar o registro.");
+      });
+  }
+
+  var deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.className = "btn btn-danger";
+  deleteButton.addEventListener("click", function () {
+    deleteRegister(idRegister);
+    deletarLinha(deleteButton);
+  });
+  
+  return deleteButton;
+}
+
+      window.addEventListener("DOMContentLoaded", function () {
+        var tRegisters = document.getElementById("tabelaAccount");
+        var tbody = tRegisters.querySelector("tbody");
+        fetch("https://localhost:5500/registers/")
+          .then(function (response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Ocorreu um erro ao obter os dados da API.");
+            }
+          })
+          .then(function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+              var newRow = tbody.insertRow();
+              newRow.insertCell().textContent = data[i].idRegister;
+              newRow.insertCell().textContent = data[i].name;
+              newRow.insertCell().textContent = data[i].email;
+              newRow.insertCell().textContent = data[i].password;
+              newRow.insertCell().textContent = data[i].birth;
+
+              var deleteCell = newRow.insertCell();
+              var deleteButton = createDeleteButton(data[i].idRegister);
+              deleteCell.appendChild(deleteButton);
+            }
+          })
+          .catch(function (error) {
+            console.error("Erro de conexão com a API:", error);
+          });
+      });
+
+      window.addEventListener("DOMContentLoaded", function () {
+        var tGames = document.getElementById("tabelaBuys");
+        var tbody = tGames.querySelector("tbody");
+        fetch("https://localhost:5500/buys/")
+          .then(function (response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Ocorreu um erro ao obter os dados da API.");
+            }
+          })
+          .then(function (data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+              var newRow = tbody.insertRow();
+              newRow.insertCell().textContent = data[i].name;
+              newRow.insertCell().textContent = data[i].price;
+
+              var buyButtonCell = newRow.insertCell();
+              var buyButton = document.createElement("button");
+              buyButton.className = "btn btn-success btn-outline-dark btn-sm";
+              var cartImage = document.createElement("img");
+              cartImage.src = "cart.png";
+              cartImage.alt = "cart.png";
+              buyButton.appendChild(cartImage);
+              buyButtonCell.appendChild(buyButton);
+            }
+          })
+          .catch(function (error) {
+            console.error("Erro de conexão com a API:", error);
+          });
+      });
+    </script>
+  </body>
+</html>

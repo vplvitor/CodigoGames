@@ -1,0 +1,28 @@
+body{
+    background: linear-gradient(to right, #003366 0%, #339966 100%);
+    background-repeat: cover;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+.account{
+    border: 0.25px solid white;
+    border-radius: 10px;
+}
+footer{
+    padding-top: 35%;
+}
+th{
+    border: 1px 1px solid black;
+}
+a{
+    font-size: 25px;
+}
+.row{
+    border: 5px 5px solid white;
+}
+button{
+    border-radius: 10px;
+}
+button:hover{
+    transition: 0.5s;
+}
