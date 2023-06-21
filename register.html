@@ -34,7 +34,7 @@
             >
               <div class="mb-3">
                 <label class="form-label" for="name">Nome</label>
-                <input class="form-control" type="text" id="name" />
+                <input class="form-control" type="text" id="name" required/>
               </div>
               <div class="mb-3">
                 <label
@@ -43,7 +43,7 @@
                   pattern="[a-zA-Z0-9]{3}@[a-zA-Z0-9]{3}\.com"
                   >E-Mail</label
                 >
-                <input class="form-control" type="email" id="email" />
+                <input class="form-control" type="email" id="email" required/>
                 <small id="emailError" style="color: red; display: none"
                   >O e-mail precisa ter 3 dígitos antes do "@" e 3 dígitos
                   depois, terminando com ".com"</small
@@ -51,11 +51,11 @@
               </div>
               <div class="mb-3">
                 <label class="form-label" for="password">Senha</label>
-                <input class="form-control" type="password" id="password" />
+                <input class="form-control" type="password" id="password" required/>
               </div>
               <div class="mb-3">
                 <label class="form-label" for="birth">Data de Nascimento</label>
-                <input class="form-control" type="date" id="birth" />
+                <input class="form-control" type="date" id="birth" required/>
               </div>
               <button
                 class="btn btn-secondary"
